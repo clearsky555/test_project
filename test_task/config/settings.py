@@ -38,12 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'rest_framework',
     'geodata',
     'django.contrib.gis',
     'django_google_maps',
     'leaflet',
     'mapwidgets',
-
+    'api',
 ]
 
 LEAFLET_CONFIG = {
