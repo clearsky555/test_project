@@ -1,0 +1,31 @@
+
+version: "3.7"
+
+services:
+  # Контейнер для базы данных PostGIS
+  db:
+    image: postgis/postgis:13-3.1
+    environment:
+      POSTGRES_DB: testproject_db
+      POSTGRES_USER: flask_user
+      POSTGRES_PASSWORD: allsafe1
+    volumes:
+      - db_data:/var/lib/postgresql/data/
+
+
+  web:
+    build: .
+    ports:
+      - "1111:1111"
+    volumes:
+      - .:/app
+      - /usr/lib/libgdal.so:/usr/lib/libgdal.so
+      - /usr/lib/x86_64-linux-gnu/libpoppler.so.118:/usr/lib/x86_64-linux-gnu/libpoppler.so.118
+    depends_on:
+      - db
+    environment:
+      - DEBUG=True
+      - DJANGO_DB_HOST=db
+
+volumes:
+  db_data:
